@@ -1,85 +1,338 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="style.css">
-        <title>My Profile</title>
-    </head><
-    <body>
-        <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#education">Education</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-</nav>
-        <section id="home">
-    <h1>Welcome to my portofile</h1>
-    <h2>BCA Student & Aspiring Developer</h2>
-    <p>welcome to my portofilo website,where I show my skills,educations and projects</p>
-    <p>I am a BCA Student intrsted in technology and development</p>
-    <a href="#about" class="home-btn">Explore my profile</a>
-</section>
-   <section id="about">
-    <h2>About Me</h2>
-    <p>
-    <p>
- My name is Bhoomika Kalal.I am a dedicated BCA student with a strong interst in technology and software development.
- I am a committed to expanding my technical knowledge,developing practical skills,and creating innovative solutions through continous learning. 
-</p>
-    </p>
-</section> 
-        <section id="education">
-    <h2>Education</h2>
-<h3 style="color:#6A5ACD;">Bachelor of Computer Apllications(BCA)</h3>
-    <p>Currently pursuing BCA with an interest in technology and software development.</p>
+<html lang="en">
 
-    <h3 style="color: #6A5ACD">Pre-University Course (PUC)</h3>
-    <p>KLS PUC College, Haliyal</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <h3 style="color: #6A5ACD;">School Education</h3>
-    <p>SAINT Theresa School, Alnavar</p>
-        </section>
-<section id="skills">
-    <h2>My Skills</h2>
+    <title>Daily Task Planner</title>
 
-    <div class="skills-list">
-        <p>HTML</p>
-        <p>CSS</p>
-        <p>Java</p>
-        <p>Python</p>
-    </div>
-</section>
-<section id="projects">
-    <h2>My Projects</h2>
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
-    <div class="project-list">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
 
-        <div class="project-card">
-            <h3>Profile Portfolio Website</h3>
-            <p>
-                A personal portfolio website created using HTML and CSS.
-            </p>
+<body>
+
+    <div class="container py-4">
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="planner-header">
+
+            <div>
+                <p class="welcome-text">WELCOME BACK 👋</p>
+
+                <h1>My Daily Planner</h1>
+
+                <p class="header-text">
+                    Organize your tasks and make your day productive.
+                </p>
+            </div>
+
+            <div class="date-box">
+                <span>Today</span>
+                <strong id="currentDate"></strong>
+            </div>
+
+        </header>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <div class="row g-4">
+
+
+            <!-- LEFT SIDE -->
+
+            <div class="col-lg-4">
+
+                <!-- Summary -->
+
+                <section class="summary-panel">
+
+                    <h2>Today's Overview</h2>
+
+                    <div class="summary-item">
+                        <span>Total Tasks</span>
+                        <strong id="totalTasks">0</strong>
+                    </div>
+
+                    <div class="summary-item">
+                        <span>Pending</span>
+                        <strong id="pendingTasks">0</strong>
+                    </div>
+
+                    <div class="summary-item">
+                        <span>Completed</span>
+                        <strong id="completedTasks">0</strong>
+                    </div>
+
+                </section>
+
+
+                <!-- Progress -->
+
+                <section class="progress-panel">
+
+                    <div class="progress-heading">
+                        <span>Daily Progress</span>
+                        <strong id="progressPercent">0%</strong>
+                    </div>
+
+                    <div class="progress">
+                        <div
+                            id="progressBar"
+                            class="progress-bar"
+                            role="progressbar"
+                            style="width: 0%;">
+                        </div>
+                    </div>
+
+                </section>
+
+
+                <!-- Filter -->
+
+                <section class="filter-panel">
+
+                    <h3>View Tasks</h3>
+
+                    <button
+                        class="filter-btn active"
+                        data-filter="all">
+                        All Tasks
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="pending">
+                        Pending
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="completed">
+                        Completed
+                    </button>
+
+                </section>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="col-lg-8">
+
+                <!-- Add Task -->
+
+                <section class="add-task-panel">
+
+                    <div class="section-title">
+
+                        <div>
+                            <h2>Add New Task</h2>
+
+                            <p>
+                                Add a task to your daily plan.
+                            </p>
+                        </div>
+
+                        <span class="add-icon">+</span>
+
+                    </div>
+
+
+                    <form id="taskForm">
+
+                        <div class="mb-3">
+
+                            <label
+                                for="taskInput"
+                                class="form-label">
+                                Task Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="taskInput"
+                                class="form-control"
+                                placeholder="What do you need to do?"
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+
+                                <label
+                                    for="taskTime"
+                                    class="form-label">
+                                    Time
+                                </label>
+
+                                <input
+                                    type="time"
+                                    id="taskTime"
+                                    class="form-control"
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    for="taskPriority"
+                                    class="form-label">
+                                    Priority
+                                </label>
+
+                                <select
+                                    id="taskPriority"
+                                    class="form-select">
+
+                                    <option value="High">
+                                        High
+                                    </option>
+
+                                    <option
+                                        value="Medium"
+                                        selected>
+                                        Medium
+                                    </option>
+
+                                    <option value="Low">
+                                        Low
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            id="addTaskBtn"
+                            class="btn add-task-btn mt-3">
+
+                            + Add Task
+
+                        </button>
+
+
+                        <p
+                            id="errorMessage"
+                            class="error-message">
+                        </p>
+
+                    </form>
+
+                </section>
+
+
+                <!-- Search -->
+
+                <section class="search-panel">
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="form-control"
+                        placeholder="🔍 Search tasks..."
+                    >
+
+                </section>
+
+
+                <!-- Task List -->
+
+                <section class="tasks-panel">
+
+                    <div class="tasks-heading">
+
+                        <div>
+                            <h2>My Tasks</h2>
+
+                            <p>
+                                Manage your daily activities
+                            </p>
+                        </div>
+
+                        <span id="taskCount">
+                            0 tasks
+                        </span>
+
+                    </div>
+
+
+                    <!-- Tasks will appear here -->
+
+                    <div id="taskList"></div>
+
+
+                    <!-- Empty message -->
+
+                    <div
+                        id="emptyMessage"
+                        class="empty-message">
+
+                        <div class="empty-icon">
+                            📝
+                        </div>
+
+                        <h3>No Tasks Yet</h3>
+
+                        <p>
+                            Add your first task and start
+                            planning your day.
+                        </p>
+
+                    </div>
+
+                </section>
+
+            </div>
+
         </div>
 
-        <div class="project-card">
-            <h3>Phishing Detection Project</h3>
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer>
+
             <p>
-                A project idea focused on identifying suspicious messages
-                and websites to improve online safety.
+                Daily Task Planner • Stay organized •
+                Stay productive
             </p>
-        </div>
+
+        </footer>
 
     </div>
-</section>
-<section id="contact">
-    <h2>Contact Me</h2>
 
-    <p><b>Name:</b> Bhoomika kalal</p>
-    <p><b>Email id:</b> bhoomikakalal9@gmail.com</p>
-</section>
-<footer>
-    <p>© 2026 Bhoomika | My Portfolio Website</p>
-</footer>
-    </body>
+
+    <!-- Bootstrap JavaScript -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+    <!-- Custom JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+
 </html>
